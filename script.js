@@ -7,20 +7,21 @@ function addTask() {
   let li = document.createElement("li");
   li.textContent = task;
 
-  // Mark complete
+  // Toggle complete
   li.onclick = function () {
-    li.style.textDecoration = "line-through";
+    li.classList.toggle("completed");
   };
 
   // Delete button
   let delBtn = document.createElement("button");
   delBtn.textContent = "X";
-  delBtn.onclick = function () {
+
+  delBtn.onclick = function (e) {
+    e.stopPropagation(); // prevent complete toggle
     li.remove();
   };
 
   li.appendChild(delBtn);
-
   document.getElementById("taskList").appendChild(li);
 
   input.value = "";
